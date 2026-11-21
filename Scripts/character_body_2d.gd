@@ -1,24 +1,14 @@
 extends CharacterBody2D
 
 @export var speed = 400
-var screen_size
 
-func _ready():
-	screen_size = get_viewport_rect().size
 
-func _process(delta):
-	var velocity = Vector2.ZERO
-	if Input.is_action_pressed("Move_Right"):
-		velocity.x += 1
-	if Input.is_action_pressed("Move_Left"):
-		velocity.x -= 1
-	if Input.is_action_pressed("Move_Down"):
-		velocity.y += 1
-	if Input.is_action_pressed("Move_Up"):
-		velocity.y -= 1
+func _physics_process(delta: float) -> void:
+	look_at(get_global_mouse_position())
 	
-	if velocity.length() > 0:
-		velocity = velocity.normalized() * speed
+	var direction = Input.get_vector("Move_Left", "Move_Right", "Move_Up", "Move_Down")
+	
+	velocity = speed * direction
+
+	move_and_slide()
 		
-	position += velocity * delta
-	position = position.clamp(Vector2.ZERO, screen_size)
