@@ -1,8 +1,10 @@
 extends CharacterBody2D
 
 @export var speed = 400
+@onready var screen_size = get_viewport_rect().size
 
-
+func _ready():
+	position = Vector2(500, 500)
 func _physics_process(delta: float) -> void:
 	look_at(get_global_mouse_position())
 	
@@ -11,4 +13,6 @@ func _physics_process(delta: float) -> void:
 	velocity = speed * direction
 
 	move_and_slide()
+	
+	position = position.clamp(Vector2.ZERO, screen_size)
 		

@@ -63,4 +63,5 @@ Shoot={
 [rendering]
 
 rendering_device/driver.windows="d3d12"
+renderer/rendering_method="gl_compatibility"
 environment/defaults/default_clear_color=Color(0.114267804, 0.1338515, 0.3826894, 1)
